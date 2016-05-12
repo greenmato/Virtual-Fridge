@@ -157,9 +157,12 @@ public class StartPageN extends AppCompatActivity {
                         .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 if(success == 1) {
+                                    dialog.cancel();
                                     finish();
                                 }
-                                dialog.cancel();
+                                else {
+                                    dialog.cancel();
+                                }
                             }
                         });
                 alertDialog = alertDialogBuilder.create();

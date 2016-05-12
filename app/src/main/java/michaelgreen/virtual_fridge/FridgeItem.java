@@ -1,6 +1,7 @@
 package michaelgreen.virtual_fridge;
 
-import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /*
  * Michael Green, 2016
@@ -21,6 +22,11 @@ public class FridgeItem {
         this.username = username;
         this.amount = amount;
         this.expiryDate = expiryDate;
+    }
+
+    public String getDescription() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return "" + amount + " " + unit + ". Best Before: " + sdf.format(expiryDate) + ".";
     }
 
     public String getName() {

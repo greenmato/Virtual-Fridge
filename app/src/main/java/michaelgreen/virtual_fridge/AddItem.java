@@ -45,7 +45,7 @@ public class AddItem extends AppCompatActivity {
         DatePickerFragment datePicker;
         switch(view.getId()) {
             case R.id.add_item_button:
-                tryCreateAccount(view);
+                tryAddItem(view);
                 break;
             case R.id.expiry_date_button:
                 //Initialise the TextView that displays the chosen date
@@ -58,19 +58,19 @@ public class AddItem extends AppCompatActivity {
 
     }
 
-    public void tryCreateAccount(View view) {
+    public void tryAddItem(View view) {
         String itemName = ((EditText) findViewById(R.id.enter_item_name)).getText().toString();
         String unit = ((EditText) findViewById(R.id.units)).getText().toString();
         String amount = ((EditText) findViewById(R.id.amount)).getText().toString();
         String expiryDate = ((TextView) findViewById(R.id.expiry_date_text)).getText().toString();
-        new TryCreateAccount().execute(itemName, unit, amount, expiryDate);
+        new TryAddItem().execute(itemName, unit, amount, expiryDate);
     }
 
 
     /*
      * Background asyncronous task to add a new ingredient.
      */
-    class TryCreateAccount extends AsyncTask<String, String, String> {
+    class TryAddItem extends AsyncTask<String, String, String> {
 
         private ProgressDialog pDialog;
         private AlertDialog alertDialog;
