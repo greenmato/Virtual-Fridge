@@ -1,0 +1,70 @@
+<resources>
+    <!-- App -->
+    <string name="app_name">Virtual-Fridge</string>
+    <string name="action_sign_out">Sign Out</string>
+
+    <!-- Start Page (Not Signed In) -->
+    <string name="title_activity_start_page_n">Start Page (Not Signed In)</string>
+    <string name="sign_in">Sign In</string>
+    <string name="create_account">Create Account</string>
+
+    <!-- Sign In -->
+    <string name="title_activity_sign_in">Sign In</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="logo">Logo</string>
+
+    <!-- Create Account -->
+    <string name="title_activity_create_account">Create Account</string>
+    <string name="confirm_username">Confirm Username</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="tcs">I accept the terms and conditions.</string>
+
+    <!-- Fridge Main Screen -->
+    <string name="fridge">Fridge</string>
+    <string name="use_item">Use Item</string>
+    <string name="add_to_fridge">Add To Fridge</string>
+    <string name="edit_fridge_button">Edit/Remove From Fridge</string>
+    <string name="options">Options</string>
+
+    <!-- Add Item -->
+    <string name="enter_item_name">Enter Item Name</string>
+    <string name="units">Unit (e.g. tins, grams, cloves etc.)</string>
+    <string name="amount">Amount of Units</string>
+    <string name="add_item">Add Item</string>
+    <string name="expiry_date">Expiry Date</string>
+
+    <!-- View Items -->
+    <string name="edit_fridge">Edit Fridge</string>
+    <string name="add_another">Add Another</string>
+    <string name="remove_item">Remove Item</string>
+    <string name="view_items">View Items</string>
+    <string name="go">Go</string>
+
+    <!-- View Items -->
+    <string name="search">Search</string>
+    <string name="sort_by">Sort By: </string>
+
+    <!-- Item -->
+    <string name="upload_picture">Upload Picture</string>
+    <string name="add_description">Add Description</string>
+    <string name="change_name">Change Name</string>
+    <string name="delete_all_from_fridge">Delete All From Fridge</string>
+
+    <!-- Suggestions -->
+    <string name="suggestions">Suggestions</string>
+    <string name="add_recipe">Add Recipe</string>
+    <string name="search_recipes">Search Recipes</string>
+
+    <!-- Add Recipe -->
+    <string name="enter_method">Enter Method</string>
+
+    <!-- Recipe -->
+    <string name="recipe">Recipe</string>
+
+    <!-- Search Recipes -->
+    <string name="search_by_ingredient">Search By Ingredient</string>
+    <string name="search_by_name">Search By Name</string>
+
+
+</resources>

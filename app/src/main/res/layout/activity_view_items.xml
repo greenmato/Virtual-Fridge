@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="michaelgreen.virtual_fridge.ViewItems">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:isScrollContainer="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/view_items"
+                android:layout_width="match_parent"
+                android:layout_height="105dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="@string/view_items"
+                android:textSize="40dp"
+                />
+
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal">
+
+                <EditText
+                    android:id="@+id/search_text"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="3"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:hint="@string/search"
+                    />
+
+                <Button
+                    android:id="@+id/search_button"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:hint="@string/go"
+                    />
+
+            </LinearLayout>
+
+            <ScrollView
+                android:layout_width="350dp"
+                android:layout_height="300dp"
+                android:layout_gravity="center_horizontal"
+                android:fillViewport="true"
+                android:isScrollContainer="true">
+
+                <LinearLayout
+                    android:id="@+id/fridge_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                </LinearLayout>
+
+            </ScrollView>
+
+            <LinearLayout
+                android:layout_gravity="center_horizontal"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/sort_by"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/sort_by"
+                    android:onClick="dialogPicker"/>
+
+                <Button
+                    android:id="@+id/add_another"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/add_another"
+                    android:onClick="dialogPicker"/>
+
+                <Button
+                    android:id="@+id/remove_item"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/remove_item"
+                    android:onClick="dialogPicker"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
