@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -28,6 +29,16 @@ import java.util.Date;
 import java.util.List;
 
 public class FridgeMainScreen extends AppCompatActivity {
+
+    private ArrayList<FridgeItem> fridgeList = new ArrayList<FridgeItem>();
+    private int noOfFridgeItems;
+
+        @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_fridge_main_screen);
+        new GetAllExpiringItems().execute();
+    }
 
     /* Called when a button is pressed - decides what to do */
     public void buttonListener(View view) {
@@ -49,38 +60,16 @@ public class FridgeMainScreen extends AppCompatActivity {
         startActivity(intent);
     }
 
-        @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fridge_main_screen);
-            AlertDialog.Builder adb = new AlertDialog.Builder(this);
-            final EditText answer = new EditText(this);
-            final FridgeItem item = fridgeList.get(position);
-            answer.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
-            adb.setTitle("Add Another");
-            adb.setMessage("Please enter the amount you wish to add...");
-            adb.setView(answer);
-            adb.setPositiveButton("Add", new Dialog.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    String amount = answer.getText().toString();
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    new AddAnother().execute(item.getName(), item.getUnit(), amount, sdf.format(item.getExpiryDate()));
-                    dialog.cancel();
-                }
-            });
-            adb.setNegativeButton("Cancel", new Dialog.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
-            adb.show();
+    public void alertUserWithExpiringItems() {
+
+
     }
 
 
     /*
      * Background asyncronous task to retrive all fridge items.
      */
-    class GetAllFridgeItems extends AsyncTask<String, String, String> {
+    class GetAllExpiringItems extends AsyncTask<String, String, String> {
 
         private ProgressDialog pDialog;
         private AlertDialog alertDialog;
@@ -88,7 +77,7 @@ public class FridgeMainScreen extends AppCompatActivity {
         JSONParser jsonParser = new JSONParser();
 
         // URL for PHP script to add an item
-        private final String URL_GET_ALL_FRIDGE_ITEMS = "http://82.35.221.203/virtual-fridge/get_all_fridge_items.php";
+        private final String URL_GET_ALL_EXPIRING_ITEMS = "http://82.35.221.203/virtual-fridge/get_all_expiring_fridge_items.php";
 
         // JSON Node names
         private final String TAG_SUCCESS = "success";
@@ -121,7 +110,7 @@ public class FridgeMainScreen extends AppCompatActivity {
             params.add(new BasicNameValuePair("username", username));
 
             // Get JSON Object
-            JSONObject json = jsonParser.makeHttpRequest(URL_GET_ALL_FRIDGE_ITEMS,
+            JSONObject json = jsonParser.makeHttpRequest(URL_GET_ALL_EXPIRING_ITEMS,
                     "POST", params);
 
             Log.d("Create Response", json.toString());
@@ -132,7 +121,7 @@ public class FridgeMainScreen extends AppCompatActivity {
                 message = json.getString(TAG_MESSAGE);
                 noOfFridgeItems = json.getInt(TAG_NO_OF_FRIDGE_ITEMS);
                 fridgeList.clear();
-                for(int i = 0; i < noOfFridgeItems; i++) {
+                for (int i = 0; i < noOfFridgeItems; i++) {
                     String name = json.getString("name" + i);
                     String unit = json.getString("unit" + i);
                     String expiryDateStr = json.getString("expiry_date" + i);
@@ -140,8 +129,7 @@ public class FridgeMainScreen extends AppCompatActivity {
                     Date expiryDate = null;
                     try {
                         expiryDate = sdf.parse(expiryDateStr);
-                    }
-                    catch(Exception e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     double amount = json.getDouble("amount" + i);
@@ -153,6 +141,31 @@ public class FridgeMainScreen extends AppCompatActivity {
             }
             return null;
         }
+        /* Inform the user in an alert dialog whether the async task was successful */
+        protected void onPostExecute(String file_url) {
+            // Dismiss the process dialog
+            pDialog.dismiss();
+            if(success == 1) {
+                AlertDialog.Builder adb = new AlertDialog.Builder(FridgeMainScreen.this);
+                for (int i = 0; i < noOfFridgeItems; i++) {
+                    TextView expiringItemView = new TextView(FridgeMainScreen.this);
+                    expiringItemView.setText(fridgeList.get(i).getName());
+                    adb.setView(expiringItemView);
+                }
+                adb.setTitle("Warning!");
+                adb.setMessage("The following items expire today:");
+                adb.setTitle("Warning!");
+                adb.setMessage("The following items expire today:");
+
+                adb.setPositiveButton("OK", new Dialog.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                adb.show();
+            }
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
