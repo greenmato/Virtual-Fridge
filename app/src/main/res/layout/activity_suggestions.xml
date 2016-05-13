@@ -35,12 +35,13 @@
                 android:fillViewport="true"
                 android:isScrollContainer="true">
 
-                <LinearLayout
+                <ListView
+                    android:id="@android:id/list"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                </LinearLayout>
-
+                    android:layout_height="200dp"
+                    android:orientation="vertical"
+                    android:choiceMode="singleChoice">
+                </ListView>
             </ScrollView>
 
             <LinearLayout

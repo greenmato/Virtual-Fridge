@@ -55,6 +55,7 @@ public class Suggestions extends AppCompatActivity {
     }
 
     public void initialiseList() {
+        Log.d("al size", String.valueOf(suggestionList.size()));
         lv = (ListView) findViewById(android.R.id.list);
         RecipeListAdapter recipeListAdapter = new RecipeListAdapter(this, suggestionList);
         lv.setAdapter(recipeListAdapter);
@@ -63,6 +64,7 @@ public class Suggestions extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(Suggestions.this, ViewRecipe.class);
+                intent.putExtra("recipe", suggestionList.get(position));
                 startActivity(intent);
             }
         });
@@ -88,7 +90,7 @@ public class Suggestions extends AppCompatActivity {
         private final String TAG_METHOD = "method";
         private final String TAG_AMOUNT = "amount";
         private final String TAG_INGREDIENT_NAME = "ingredient_name";
-        private final String TAG_UNIT_NAME = "unit_name";
+        private final String TAG_INGREDIENT_UNIT= "ingredient_unit";
         private final String TAG_NO_OF_SUGGESTIONS = "no_of_suggestions";
         private final String TAG_NO_OF_INGREDIENTS = "no_of_ingredients";
 
@@ -128,6 +130,7 @@ public class Suggestions extends AppCompatActivity {
                 success = json.getInt(TAG_SUCCESS);
                 message = json.getString(TAG_MESSAGE);
                 noOfSuggestions = json.getInt(TAG_NO_OF_SUGGESTIONS);
+                Log.d("noOfSuggestions", String.valueOf(noOfSuggestions));
                 for(int x = 0; x < noOfSuggestions; x++) {
                     //Retrieve the JSON result
                     noOfIngredients = json.getInt(TAG_NO_OF_INGREDIENTS + x);
@@ -135,10 +138,9 @@ public class Suggestions extends AppCompatActivity {
                     String method = json.getString(TAG_METHOD + x);
                     ArrayList<Ingredient> items = new ArrayList<Ingredient>();
                     ArrayList<Double> amounts = new ArrayList<Double>();
-                    suggestionList.clear();
                     for (int i = 0; i < noOfIngredients; i++) {
                         String ingredientName = json.getString(TAG_INGREDIENT_NAME + x + i);
-                        String unitName = json.getString(TAG_UNIT_NAME + x + i);
+                        String unitName = json.getString(TAG_INGREDIENT_UNIT + x + i);
                         double amount = json.getDouble(TAG_AMOUNT + x + i);
                         Ingredient ingredient = new Ingredient(ingredientName, unitName);
                         items.add(ingredient);
@@ -147,6 +149,7 @@ public class Suggestions extends AppCompatActivity {
                     Recipe recipe = new Recipe(name, items, amounts, method);
                     suggestionList.add(recipe);
                 }
+                Log.d("al size", String.valueOf(suggestionList.size()));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
