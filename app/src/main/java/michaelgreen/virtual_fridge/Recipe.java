@@ -10,10 +10,10 @@ public class Recipe {
 
     private String name;
     private ArrayList<Ingredient> items;
-    private ArrayList<Integer> amounts;
+    private ArrayList<Double> amounts;
     private String method;
 
-    public Recipe(String name, ArrayList<Ingredient> items, ArrayList<Integer> amounts, String method) {
+    public Recipe(String name, ArrayList<Ingredient> items, ArrayList<Double> amounts, String method) {
         this.name = name;
         this.items = items;
         this.amounts = amounts;
@@ -38,11 +38,11 @@ public class Recipe {
         this.items = items;
     }
 
-    public ArrayList<Integer> getAmounts() {
+    public ArrayList<Double> getAmounts() {
         return amounts;
     }
 
-    public void setAmounts(ArrayList<Integer> amounts) {
+    public void setAmounts(ArrayList<Double> amounts) {
         this.amounts = amounts;
     }
 

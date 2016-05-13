@@ -41,7 +41,7 @@ public class AddRecipe extends AppCompatActivity {
         setContentView(R.layout.activity_add_recipe);
 
         recipe.setItems(new ArrayList<Ingredient>());
-        recipe.setAmounts(new ArrayList<Integer>());
+        recipe.setAmounts(new ArrayList<Double>());
 
         new GetAllIngredients().execute();
     }
@@ -72,7 +72,7 @@ public class AddRecipe extends AppCompatActivity {
                 adb.setPositiveButton("Add To Recipe", new Dialog.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         recipe.getItems().add(item);
-                        recipe.getAmounts().add(Integer.valueOf(amount.getText().toString()));
+                        recipe.getAmounts().add(Double.valueOf(amount.getText().toString()));
                         dialog.cancel();
                     }
                 });

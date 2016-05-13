@@ -1,27 +1,25 @@
 package michaelgreen.virtual_fridge;
 
 import android.content.Context;
-import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 /**
- * 
+ * Created by John on 13/05/2016.
  */
 
-public class FridgeItemListAdapter extends ArrayAdapter<FridgeItem> {
+public class RecipeListAdapter extends ArrayAdapter<Recipe> {
 
     Context c;
-    ArrayList<FridgeItem> items;
+    ArrayList<Recipe> items;
     LayoutInflater inflater;
 
-    public FridgeItemListAdapter(Context context, ArrayList<FridgeItem> items) {
+    public RecipeListAdapter(Context context, ArrayList<Recipe> items) {
         super(context, R.layout.ingredient_list_item, items);
         this.c = context;
         this.items = items;
@@ -30,7 +28,6 @@ public class FridgeItemListAdapter extends ArrayAdapter<FridgeItem> {
     public class ViewHolder
     {
         TextView name;
-        TextView description;
     }
 
     @Override
@@ -43,11 +40,9 @@ public class FridgeItemListAdapter extends ArrayAdapter<FridgeItem> {
 
         //Initialise views
         holder.name = (TextView) convertView.findViewById(R.id.first_line);
-        holder.description = (TextView) convertView.findViewById(R.id.second_line);
 
-        FridgeItem item = getItem(position);
+        Recipe item = getItem(position);
         holder.name.setText(item.getName());
-        holder.description.setText(item.getDescription());
 
 
         return convertView;
