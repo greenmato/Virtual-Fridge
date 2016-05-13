@@ -28,6 +28,15 @@
                 android:textSize="40dp"
                 />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="@string/explanation"
+                android:textSize="12dp"
+            />
+
             <ScrollView
                 android:layout_width="350dp"
                 android:layout_height="300dp"

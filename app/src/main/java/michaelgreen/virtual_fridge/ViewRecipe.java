@@ -16,7 +16,7 @@ public class ViewRecipe extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipe);
+        setContentView(R.layout.activity_view_recipe);
 
         recipe = getIntent().getParcelableExtra("recipe");
         Log.d("recipe", recipe.getName());
@@ -25,7 +25,8 @@ public class ViewRecipe extends AppCompatActivity {
         ingredientList = (TextView) findViewById(R.id.ingredient_list);
         String ingredientListStr = "Ingredients: \n";
         for(int i = 0; i < recipe.getItems().size(); i++) {
-            ingredientListStr = ingredientListStr + recipe.getItems().get(i) + "\n";
+            ingredientListStr = ingredientListStr + "- " +  recipe.getItems().get(i).getName() + ": " +
+                    recipe.getAmounts().get(i).toString() + " " + recipe.getItems().get(i).getUnit() + "\n";
         }
         ingredientList.setText(ingredientListStr);
         method = (TextView) findViewById(R.id.method);

@@ -9,18 +9,28 @@ import java.util.Map;
 /**
  * Created by John on 13/05/2016.
  */
-public class Recipe implements Parcelable {
+public class Recipe implements Parcelable, Comparable<Recipe> {
 
     private String name;
     private ArrayList<Ingredient> items;
     private ArrayList<Double> amounts;
     private String method;
+    private int score;
 
     public Recipe(String name, ArrayList<Ingredient> items, ArrayList<Double> amounts, String method) {
         this.name = name;
         this.items = items;
         this.amounts = amounts;
         this.method = method;
+        this.score = 0;
+    }
+
+    public int compareTo(Recipe compareRecipe) {
+
+        int compareScore = ((Recipe) compareRecipe).getScore();
+
+        //descending order
+        return compareScore - this.score;
     }
 
     public Recipe() {}
@@ -55,6 +65,14 @@ public class Recipe implements Parcelable {
 
     public void setMethod(String method) {
         this.method = method;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     protected Recipe(Parcel in) {

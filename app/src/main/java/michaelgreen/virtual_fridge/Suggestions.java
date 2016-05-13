@@ -22,6 +22,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -93,6 +94,7 @@ public class Suggestions extends AppCompatActivity {
         private final String TAG_INGREDIENT_UNIT= "ingredient_unit";
         private final String TAG_NO_OF_SUGGESTIONS = "no_of_suggestions";
         private final String TAG_NO_OF_INGREDIENTS = "no_of_ingredients";
+        private final String TAG_SCORE = "score";
 
         // Stores JSON response
         private int success;
@@ -146,10 +148,12 @@ public class Suggestions extends AppCompatActivity {
                         items.add(ingredient);
                         amounts.add(amount);
                     }
+                    int score = json.getInt(TAG_SCORE + x);
                     Recipe recipe = new Recipe(name, items, amounts, method);
+                    recipe.setScore(score);
                     suggestionList.add(recipe);
                 }
-                Log.d("al size", String.valueOf(suggestionList.size()));
+                Collections.sort(suggestionList);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

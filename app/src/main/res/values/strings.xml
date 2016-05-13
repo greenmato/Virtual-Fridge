@@ -55,6 +55,7 @@
     <string name="suggestions">Suggestions</string>
     <string name="add_recipe">Add Recipe</string>
     <string name="search_recipes">Search Recipes</string>
+    <string name="explanation">Search Recipes</string>
 
     <!-- Add Recipe -->
     <string name="enter_method">Enter Method</string>
