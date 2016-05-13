@@ -22,8 +22,8 @@
 
     <!-- Fridge Main Screen -->
     <string name="fridge">Fridge</string>
-    <string name="use_item">Use Item</string>
-    <string name="add_to_fridge">Add To Fridge</string>
+    <string name="use_item">Use Items</string>
+    <string name="add_to_fridge">Add New Item To Fridge</string>
     <string name="edit_fridge_button">Edit/Remove From Fridge</string>
     <string name="options">Options</string>
 
@@ -58,6 +58,7 @@
 
     <!-- Add Recipe -->
     <string name="enter_method">Enter Method</string>
+    <string name="recipe_name">Recipe Name</string>
 
     <!-- Recipe -->
     <string name="recipe">Recipe</string>

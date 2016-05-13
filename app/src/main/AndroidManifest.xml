@@ -25,10 +25,10 @@
         <activity android:name=".FridgeMainScreen" />
         <activity android:name=".AddItem" />
         <activity android:name=".ViewItems" />
-        <activity android:name=".Item" />
+        <activity android:name=".ViewItem" />
         <activity android:name=".Suggestions" />
         <activity android:name=".AddRecipe" />
-        <activity android:name=".Recipe" />
+        <activity android:name=".ViewRecipe" />
         <activity android:name=".SearchRecipes"></activity>
     </application>
 

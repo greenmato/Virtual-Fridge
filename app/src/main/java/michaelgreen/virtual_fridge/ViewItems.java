@@ -25,7 +25,6 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class ViewItems extends ListActivity {
 
@@ -86,6 +85,7 @@ public class ViewItems extends ListActivity {
     public void tryRemoveSome(int position) {
         AlertDialog.Builder adb = new AlertDialog.Builder(this);
         final EditText answer = new EditText(this);
+        final FridgeItem item = fridgeList.get(position);
         answer.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
         adb.setTitle("Remove Some");
         adb.setMessage("Please enter the amount you wish to remove...");
@@ -93,7 +93,8 @@ public class ViewItems extends ListActivity {
         adb.setPositiveButton("Remove", new Dialog.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 String amount = "-" + answer.getText().toString();
-                new AddAnother().execute(amount);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                new AddAnother().execute(item.getName(), item.getUnit(), amount, sdf.format(item.getExpiryDate()));
                 dialog.cancel();
             }
         });
@@ -107,8 +108,8 @@ public class ViewItems extends ListActivity {
 
     public void initialiseList() {
         lv = (ListView) findViewById(android.R.id.list);
-        Adapter adapter = new Adapter(this, fridgeList);
-        lv.setAdapter(adapter);
+        FridgeItemListAdapter fridgeItemListAdapter = new FridgeItemListAdapter(this, fridgeList);
+        lv.setAdapter(fridgeItemListAdapter);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -187,6 +188,7 @@ public class ViewItems extends ListActivity {
                 success = json.getInt(TAG_SUCCESS);
                 message = json.getString(TAG_MESSAGE);
                 noOfFridgeItems = json.getInt(TAG_NO_OF_FRIDGE_ITEMS);
+                fridgeList.clear();
                 for(int i = 0; i < noOfFridgeItems; i++) {
                     String name = json.getString("name" + i);
                     String unit = json.getString("unit" + i);
@@ -280,15 +282,15 @@ public class ViewItems extends ListActivity {
             String amount = args[2];
             String expiryDate = args[3];
 
-            Log.d("stuff", name + units + username + amount + expiryDate);
+            Log.d("stuff", name + " " + units + " " + username + " " + amount + " " + expiryDate);
 
             // Build HTTP request parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("username", username));
             params.add(new BasicNameValuePair("item_name", name));
-            params.add(new BasicNameValuePair("units", units));
+            params.add(new BasicNameValuePair("unit", units));
             params.add(new BasicNameValuePair("amount", amount));
             params.add(new BasicNameValuePair("expiry_date", expiryDate));
+            params.add(new BasicNameValuePair("username", username));
 
             // Get JSON Object
             JSONObject json = jsonParser.makeHttpRequest(URL_TRY_ADD_ITEM,
@@ -324,7 +326,7 @@ public class ViewItems extends ListActivity {
                     .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             if(success == 1) {
-                                initialiseList();
+                                new GetAllFridgeItems().execute();
                             }
                             dialog.cancel();
                         }

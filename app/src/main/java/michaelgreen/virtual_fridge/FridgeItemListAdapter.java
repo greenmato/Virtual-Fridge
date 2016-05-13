@@ -50,13 +50,13 @@ import java.util.ArrayList;
 //
 //        return convertView;
 //    }
-public class Adapter extends ArrayAdapter<FridgeItem> {
+public class FridgeItemListAdapter extends ArrayAdapter<FridgeItem> {
 
     Context c;
     ArrayList<FridgeItem> items;
     LayoutInflater inflater;
 
-    public Adapter(Context context, ArrayList<FridgeItem> items) {
+    public FridgeItemListAdapter(Context context, ArrayList<FridgeItem> items) {
         super(context, R.layout.ingredient_list_item, items);
         this.c = context;
         this.items = items;

@@ -1,13 +1,56 @@
 package michaelgreen.virtual_fridge;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import java.util.ArrayList;
+import java.util.Map;
 
-public class Recipe extends AppCompatActivity {
+/**
+ * Created by John on 13/05/2016.
+ */
+public class Recipe {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipe);
+    private String name;
+    private ArrayList<Ingredient> items;
+    private ArrayList<Integer> amounts;
+    private String method;
+
+    public Recipe(String name, ArrayList<Ingredient> items, ArrayList<Integer> amounts, String method) {
+        this.name = name;
+        this.items = items;
+        this.amounts = amounts;
+        this.method = method;
+    }
+
+    public Recipe() {}
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ArrayList<Ingredient> getItems() {
+        return items;
+    }
+
+    public void setItems(ArrayList<Ingredient> items) {
+        this.items = items;
+    }
+
+    public ArrayList<Integer> getAmounts() {
+        return amounts;
+    }
+
+    public void setAmounts(ArrayList<Integer> amounts) {
+        this.amounts = amounts;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
     }
 }

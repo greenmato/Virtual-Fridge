@@ -85,24 +85,6 @@
                     android:layout_weight="1"
                     android:text="@string/sort_by"
                     android:onClick="dialogPicker"/>
-
-                <Button
-                    android:id="@+id/add_another"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/add_another"
-                    android:onClick="dialogPicker"/>
-
-                <Button
-                    android:id="@+id/remove_item"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/remove_item"
-                    android:onClick="dialogPicker"/>
             </LinearLayout>
 
         </LinearLayout>
